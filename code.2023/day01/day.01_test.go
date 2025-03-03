@@ -1,4 +1,4 @@
-package code2023
+package day01
 
 import "testing"
 
@@ -8,20 +8,32 @@ func Test_ProcessCalibration(t *testing.T) {
 		want int
 	}{
 		{
-			arg:  "1abc2",
-			want: 12,
+			arg:  "two1nine",
+			want: 29,
 		},
 		{
-			arg:  "pqr3stu8vwx",
-			want: 38,
+			arg:  "eightwothree",
+			want: 83,
 		},
 		{
-			arg:  "a1b2c3d4e5f",
-			want: 15,
+			arg:  "abcone2threexyz",
+			want: 13,
 		},
 		{
-			arg:  "treb7uchet",
-			want: 77,
+			arg:  "xtwone3four",
+			want: 24,
+		},
+		{
+			arg:  "4nineeightseven2",
+			want: 42,
+		},
+		{
+			arg:  "zoneight234",
+			want: 14,
+		},
+		{
+			arg:  "7pqrstsixteen",
+			want: 76,
 		},
 	}
 	for _, tC := range testCases {
@@ -41,11 +53,11 @@ func Test_Calibration(t *testing.T) {
 	}{
 		{
 			file: "input_test.txt",
-			want: 142,
+			want: 281,
 		},
 		{
 			file: "input.txt",
-			want: 56049,
+			want: 54530,
 		},
 	}
 	for _, tC := range testCases {
