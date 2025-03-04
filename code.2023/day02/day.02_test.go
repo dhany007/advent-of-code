@@ -6,17 +6,17 @@ func Test_SumValidBag(t *testing.T) {
 	testCases := []struct {
 		desc string
 		file string
-		want int
+		want int64
 	}{
 		{
 			desc: "input_test",
 			file: "input_test.txt",
-			want: 8,
+			want: 2286,
 		},
 		{
 			desc: "input",
 			file: "input.txt",
-			want: 2162,
+			want: 72513,
 		},
 	}
 	for _, tC := range testCases {
