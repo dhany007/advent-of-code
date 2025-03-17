@@ -20,3 +20,5 @@ Please Reference to this link https://adventofcode.com/2023
 - Day 4
   - Part 1 = 24160
   - Part 2 = 5659035
+- Day 5
+  - Part 1 = 340994526
