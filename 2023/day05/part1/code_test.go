@@ -8,7 +8,7 @@ func TestFertilizer(t *testing.T) {
 		result   int64
 	}{
 		{
-			filename: "../input_test.txt",
+			filename: "input_test.txt",
 			result:   35,
 		},
 		{

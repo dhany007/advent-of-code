@@ -1,4 +1,4 @@
-package day01
+package part2
 
 import (
 	"bufio"
@@ -14,7 +14,12 @@ func Calibration(s string) (result int64) {
 		log.Println(err)
 		return
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
