@@ -1,8 +1,7 @@
-package day05
+package part2
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"math"
 	"os"
@@ -34,6 +33,9 @@ var (
 	}
 
 	maxGardener = 8
+
+	valueSeed []int64
+	incSeed   []int64
 )
 
 func GetLocationGarden(filename string) int64 {
@@ -63,7 +65,9 @@ func GetLocationGarden(filename string) int64 {
 		currentKey = constructData(text, currentKey)
 	}
 
-	return processCorresponds()
+	constructSeeds()
+
+	return processSeed()
 }
 
 func calculateCorresponds(initial int64, values []string) int64 {
@@ -104,38 +108,50 @@ func constructData(t string, currentKey string) string {
 	return currentKey
 }
 
-func processCorresponds() int64 {
-	seeds := strings.Split(rawData[0][0], " ")
-	var minimumLocation int64 = math.MaxInt64
-
-	for _, seed := range seeds {
-		s, err := strconv.ParseInt(seed, 10, 64)
-		if err != nil {
-			log.Fatal(err)
+func constructSeeds() {
+	seed, found := rawData[0]
+	if found {
+		val := strings.Split(seed[0], " ")
+		for i := 0; i < len(val)-1; i++ {
+			key, _ := strconv.ParseInt(val[i], 10, 64)
+			inc, _ := strconv.ParseInt(val[i+1], 10, 64)
+			if i%2 == 0 {
+				valueSeed = append(valueSeed, key)
+				incSeed = append(incSeed, inc)
+			}
 		}
+	}
+}
 
-		fmt.Println(s)
-
-		corresponds := s
-		for i := 1; i < maxGardener; i++ {
-			values, found := rawData[int32(i)]
-			if !found {
-				continue
+func processSeed() int64 {
+	var minimum int64 = math.MaxInt64
+	for i := 0; i < len(valueSeed); i++ {
+		seed := valueSeed[i]
+		for j := int64(0); j < incSeed[i]; j++ {
+			result := processCorresponds(seed)
+			if result < minimum {
+				minimum = result
 			}
 
-			corresponds = calculateCorresponds(corresponds, values)
+			seed += 1
 		}
-
-		fmt.Println("corresponds", corresponds)
-
-		if corresponds <= minimumLocation {
-			minimumLocation = corresponds
-		}
-
-		fmt.Println("minimum location", minimumLocation)
 	}
 
-	return minimumLocation
+	return minimum
+}
+
+func processCorresponds(seed int64) int64 {
+	corresponds := seed
+	for i := 1; i < maxGardener; i++ {
+		values, found := rawData[int32(i)]
+		if !found {
+			continue
+		}
+
+		corresponds = calculateCorresponds(corresponds, values)
+	}
+
+	return corresponds
 }
 
 func upsertData(t, key string) {

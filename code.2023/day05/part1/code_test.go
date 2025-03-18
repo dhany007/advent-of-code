@@ -1,4 +1,4 @@
-package day05
+package part1
 
 import "testing"
 
@@ -7,12 +7,12 @@ func TestFertilizer(t *testing.T) {
 		filename string
 		result   int64
 	}{
-		//{
-		//	filename: "input_test.txt",
-		//	result:   35,
-		//},
 		{
-			filename: "input.txt",
+			filename: "../input_test.txt",
+			result:   35,
+		},
+		{
+			filename: "../input.txt",
 			result:   340994526,
 		},
 	}
